@@ -3,15 +3,30 @@
 
 module Ex5 where
 
+import Data.Char (isPrint)
 import Text.ParserCombinators.Parsec
-import WYAS48H
 
-characterName :: Parser String
-characterName = string "newline" <|> string "space"
+data LispVal = Atom String
+             | List [LispVal]
+             | DottedList [LispVal] LispVal
+             | Number Integer
+             | Character Char
+             | String String
+             | Bool Bool
+             deriving(Show)
+
+printable :: Parser Char
+printable = satisfy isPrint
+
+characterName :: Parser Char
+characterName = do
+                name <- string "newline" <|> string "space"
+                return $ case name of
+                              "newline" ->  '\n'
+                              "space"   ->  ' '
 
 parseCharacter :: Parser LispVal
 parseCharacter = do
-                 char '#'
-                 char '\\'
-                 c <- anyChar
+                 string "#\\"
+                 c <- try characterName <|> printable
                  return $ Character c
