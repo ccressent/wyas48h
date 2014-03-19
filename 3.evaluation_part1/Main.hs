@@ -53,7 +53,7 @@ parseAtom = do
                  "#t" -> return $ Bool True
                  "#f" -> return $ Bool False
                  _    -> return $ Atom atom
--- Using liftM
+
 parseNumber :: Parser LispVal
 parseNumber = liftM (Number . read) $ many1 digit
 
