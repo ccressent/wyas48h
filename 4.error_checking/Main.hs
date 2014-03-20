@@ -167,5 +167,5 @@ unpackNum notNum     = throwError $ TypeMismatch "number" notNum
 main :: IO ()
 main = do
        args   <- getArgs
-       evaled <- return $ liftM show $ readExpr (args !! 0) >>= eval
+       evaled <- return $ liftM show $ readExpr (head args) >>= eval
        putStrLn $ extractValue $ trapError evaled
