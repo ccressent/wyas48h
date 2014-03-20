@@ -151,9 +151,9 @@ primitives = [("+", numericBinop (+))
              ,("remainder", numericBinop rem)]
 
 numericBinop :: (Integer -> Integer -> Integer) -> [LispVal] -> ThrowsError LispVal
-numericBinop op []      = throwError $ NumArgs 2 []
-numericBinop op val@[_] = throwError $ NumArgs 2 val
-numericBinop op params  = mapM unpackNum params >>= return . Number . foldl1 op
+numericBinop _ []      = throwError $ NumArgs 2 []
+numericBinop _ val@[_] = throwError $ NumArgs 2 val
+numericBinop op params = liftM (Number . foldl1 op) $ mapM unpackNum params
 
 unpackNum :: LispVal -> ThrowsError Integer
 unpackNum (Number n) = return n
