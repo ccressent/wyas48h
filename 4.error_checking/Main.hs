@@ -56,8 +56,8 @@ showError (Parser parseErr) = "Parse error at " ++ show parseErr
 
 type ThrowsError = Either LispError
 
--- trapError :: LispError -> LispError
-trapError action = catchError action (return . show)
+trapError :: (Show e, MonadError e m) => m String -> m String
+trapError action = action `catchError` (return . show)
 
 extractValue :: ThrowsError a -> a
 extractValue (Right val) = val
