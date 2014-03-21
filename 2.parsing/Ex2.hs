@@ -6,10 +6,10 @@
 module Ex2 where
 
 import Text.ParserCombinators.Parsec
-import WYAS48H
+import Wyas48h hiding (parseString)
 
 parseString :: Parser LispVal
-parseString = do 
+parseString = do
               char '"'
               s <- many $ (char '\\' >> char '"') <|> noneOf "\""
               char '"'

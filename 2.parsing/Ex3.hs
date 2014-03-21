@@ -1,10 +1,13 @@
 -- Modify the previous exercise to support \n, \r, \t, \\, and any other
 -- desired escape characters.
+-- R5RS says "Scheme does not specify the effect of a backslash within a string
+-- that is not followed by a doublequote or backslash". We support \n, \r and
+-- \t nonetheless for the sake of solving the exercice.
 
 module Ex3 where
 
 import Text.ParserCombinators.Parsec
-import WYAS48H
+import Wyas48h hiding (parseString)
 
 {-# ANN module "HLint: ignore Use string literal" #-}
 

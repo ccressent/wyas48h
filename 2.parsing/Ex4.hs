@@ -4,7 +4,7 @@ module Ex4 where
 
 import Numeric (readHex, readOct)
 import Text.ParserCombinators.Parsec
-import WYAS48H
+import Wyas48h hiding (parseNumber)
 
 {-# ANN module "HLint: ignore Use string literal" #-}
 
@@ -23,13 +23,13 @@ radixPrefix = do
 
 parseNumber :: Parser LispVal
 parseNumber = do
-              radix <- optionMaybe radixPrefix
-              case radix of
-                   Just Binary      -> parseBinaryNumber
-                   Just Octal       -> parseOctalNumber
-                   Just Decimal     -> parseDecimalNumber
-                   Just Hexadecimal -> parseHexadecimalNumber
-                   Nothing          -> parseDecimalNumber
+               radix <- optionMaybe radixPrefix
+               case radix of
+                    Just Binary      -> parseBinaryNumber
+                    Just Octal       -> parseOctalNumber
+                    Just Decimal     -> parseDecimalNumber
+                    Just Hexadecimal -> parseHexadecimalNumber
+                    Nothing          -> parseDecimalNumber
 
 isBinDigit :: Char -> Bool
 isBinDigit c = c == '0' || c == '1'

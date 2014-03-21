@@ -4,9 +4,9 @@
 
 module Ex1 where
 
-import Control.Monad
+import Control.Monad (liftM)
 import Text.ParserCombinators.Parsec
-import WYAS48H
+import Wyas48h hiding (parseNumber)
 
 -- Using liftM
 parseNumber :: Parser LispVal
