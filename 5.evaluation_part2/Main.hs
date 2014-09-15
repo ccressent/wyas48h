@@ -70,7 +70,8 @@ unpackEquals :: LispVal -> LispVal -> Unpacker -> ThrowsError Bool
 unpackEquals arg1 arg2 (AnyUnpacker unpacker) =
     do unpacked1 <- unpacker arg1
        unpacked2 <- unpacker arg2
-       return (unpacked1 == unpacked2) `catchError` (const $ return False)
+       return $ unpacked1 == unpacked2
+    `catchError` (const $ return False)
 
 symbol :: Parser Char
 symbol = oneOf "!#$%&|*+-/:<=>?@^_~"
