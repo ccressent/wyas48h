@@ -1,2 +1,3 @@
 - Finish chapter 2
+- Finish chapter 5, exercise 3 and 4
 - Write QuickCheck tests where relevant
