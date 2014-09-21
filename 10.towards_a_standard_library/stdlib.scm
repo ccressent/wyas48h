@@ -55,3 +55,10 @@
 
 (define (map func lst)    (foldr (lambda (val acc) (cons (func val) acc)) '() lst))
 (define (filter pred lst) (foldr (lambda (val acc) (if (pred val) (cons val acc) acc)) '() lst))
+
+(define (list-tail lst k) (foldr (lambda (val acc)
+                                    (if (< (length acc) (- (length lst) k)) (cons val acc) acc))
+                                    '()
+                                    lst))
+
+(define (list-ref list k) (car (list-tail list k)))
